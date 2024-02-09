@@ -1,0 +1,24 @@
+<div class="login d-flex justify-content-center align-items-center" style="width: 100%;height:85vh;background-color: black;">
+    
+<div style="height: 300px;background-color:black;" class="row border rounded shadow w-50 mt-5" >
+    <div class="col-md-3"></div>
+    <div class="col-md-6 ">
+        <h3 class="d-flex justify-content-center align-items-center mt-5" style="color: blue;font-weight: bold;">Login Form</h3>
+        <form (ngSubmit)="login()" #loginform ="ngForm" >
+            <div class="mb-3 mt-3">
+                <input type="text" class="form-control " placeholder="Enter Email" email required [(ngModel)]="email" name="email" #useremail ="ngModel" >
+                <span *ngIf="useremail.invalid && useremail.touched" class="text-danger ">Invalid Email</span>
+            </div>
+            <div class="mb-3">
+                <input type="password" class="form-control" placeholder="Enter Password" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{5,}$" [(ngModel)]="password" name="password"  #userpswd ="ngModel">
+                <span *ngIf="userpswd.invalid && userpswd.touched" class="text-danger" >Invalid Password</span>
+            </div>
+            <div class="mb-3 d-flex justify-content-center align-items-center">
+                <button type="submit" [disabled] ="loginform.invalid" class="btn btn-success">Login</button>
+            </div>
+        </form>
+    </div>
+    <div class="col-md-3"></div>
+</div>
+
+</div>

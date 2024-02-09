@@ -1,0 +1,68 @@
+<div class="row" style="background-color:pink">
+    <div class="col-md-2 bg-dark" style="height: 650px;">
+        <div class="row d-flex justify-content-center align-items-center ">
+            <div class="col-md-2 mt-5  ">
+            </div>
+            <div class="col-md-10 mt-5 ">
+                <a routerLink="/dashboard" style="text-decoration: none;"><h3 style="font-size: 20px;color: white;font-weight: bold;">Home</h3></a>
+            </div>
+        </div>
+        <div class="row d-flex justify-content-center align-items-center ">
+            <div class="col-md-2  ">
+            </div>
+            <div class="col-md-10 mt-3 ">
+               <a routerLink="/employees" style="text-decoration: none;"> <h3 style="font-size: 20px;color: white;font-weight: bold;">Users List</h3></a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-10 ">
+        <div class="container d-flex justify-content-center align-items-center ">
+            <h2  style="font-weight: bold;margin-top: 80px;color: blue;">Add New Users List</h2>
+        </div>
+        <!-- form -->
+      <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <div class="shadow mt-2 p-4 bg-dark" style="width: 850px;height: 430px; border-radius: 10px;">
+                <form (ngSubmit)="addEmployee()">
+
+                    <div class="mb-4">
+                        <input type="text" placeholder="UserId" class="form-control" name="empid" [(ngModel)]="employee.id" required pattern="[0-9]*" #employeeid="ngModel" >
+
+                        <span *ngIf="employeeid.invalid && employeeid.touched" class="text-danger">Invalid UserId</span>
+                      </div>
+
+                      <div class="mb-4">
+                        <input type="text" placeholder="UserName" class="form-control" name="empname" [(ngModel)]="employee.name" required pattern="^[a-zA-Z]{3,}$" #employeename="ngModel">
+
+                        <span *ngIf="employeename.invalid && employeename.touched" class="text-danger">Invalid Username</span>
+                      </div>
+
+                      <div class="mb-4">
+                        <input type="text" placeholder="Email" class="form-control" name="empemail" [(ngModel)]="employee.email" email required #employeeemail="ngModel">
+
+                        <span *ngIf="employeeemail.invalid && employeeemail.touched" class="text-danger">Invalid Email</span>
+                      </div>
+
+                      <div class="form-floating mb-4">
+                        <select class="form-select" id="floatingSelect" aria-label="Floating label select example" name="empstatus" [(ngModel)]="employee.status"  required #employeestatus="ngModel">
+                          <option selected></option>
+                          <option value="1">Active</option>
+                          <option value="0">Inactive</option>
+                        </select>
+                        <span *ngIf="employeestatus.invalid && employeestatus.touched" class="text-danger">Invalid status</span>
+                        <label for="floatingSelect">Status</label>
+                      </div>
+                      <div class="mb-4">
+                        <button (click)="cancelEmployee()" class="btn btn-warning rounded">Cancel</button>
+                        <button type="submit" class="btn btn-success rounded ms-2">Save</button>
+                      </div>
+                </form>
+
+            </div>
+        </div>
+        <div class="col-md-2"></div>
+
+      </div>
+    </div>
+</div>

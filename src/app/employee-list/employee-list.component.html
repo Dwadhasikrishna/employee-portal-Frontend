@@ -1,0 +1,75 @@
+<div class="row" style="background-color: rgb(82, 116, 143);">
+    <!-- side nav -->
+    <div class="col-md-2 bg-dark" style="height: 100vh;">
+        <div class="row d-flex justify-content-center align-items-center ">
+            <div class="col-md-2 mt-5  ">
+            </div>
+            <div class="col-md-10 mt-5 ">
+                <a routerLink="/dashboard" style="text-decoration: none;"><h3 style="font-size: 20px;color: white;font-weight: bold;">Home</h3></a>
+            </div>
+        </div>
+        <div class="row d-flex justify-content-center align-items-center ">
+            <div class="col-md-2  ">
+            </div>
+            <div class="col-md-10 mt-3 ">
+               <a routerLink="/employees" style="text-decoration: none;"> <h3 style="font-size: 20px;color: white;font-weight: bold;">Users List</h3></a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-10">
+        <div class="container shadow mt-5">
+            <div class="d-flex container">
+                <h2 class="text-center fw-bold text-white mt-2">USER LISTS</h2>
+               <a routerLink="/employees/add" class="ms-auto me-4 mt-2"> <button class="btn btn-dark text-light ">ADD <i class="fa-solid fa-user"></i>+</button></a>
+            </div>
+            <div class="d-flex mt-4">
+                <input type="text" placeholder="Username" class="form-control w-50 " name="search" [(ngModel)]="searchkey">
+                <div class="dropdown">
+                    <a class="btn btn-secondary dropdown-toggle ms-2" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                     Sort
+                    </a>
+                  
+                    <ul class="dropdown-menu">
+                      <li><a (click)="sortId()" class="dropdown-item" >By Id</a></li>
+                      <li><a (click)="sortName()" class="dropdown-item">By Name</a></li>
+                    </ul>
+                  </div>
+                <button (click)="generatePdf()" class="btn btn-primary ms-auto me-4">EXPORT</button>
+            </div>
+    
+                <div class="mt-5 d-flex justify-content-center align-items-center">
+                    <table class="table-bordered w-100 ">
+                        <thead class="text-center" style="background-color: rgba(0, 255, 255, 0.397);">
+                            <tr>
+                                <th class="p-3">USER ID</th>
+                                <th  class="p-3">USER NAME</th>
+                                <th  class="p-3">EMAIL</th>
+                                <th  class="p-3">STATUS</th>
+                                <th  class="p-3">ACTION</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-center" style="background-color: white;">
+                            <tr *ngFor="let employee of allEmployee | search :searchkey | paginate: {       itemsPerPage: 6,currentPage: p}" [hidden]="employee.id=='1'">
+                              
+                                <td  class="p-3">{{employee.id}}</td>
+                                <td  class="p-3">{{employee.name}}</td>
+                                <td  class="p-3">{{employee.email}}</td>
+                                <td  class="p-3"><span [ngClass]="employee.status=='1'?'btn btn-success' :' btn btn-warning'">{{employee.status=='1'?'Active':'InActive'}}</span></td>
+                                <td class="d-flex p-3">
+                                    <a routerLink="/employees/edit/{{employee.id}}"><button class="btn btn-outline-info"><i class="fa-solid fa-pen text-info"></i></button></a>
+
+                                    <button (click)="removeEmployee(employee.id)" class="btn btn-outline-danger ms-2"><i class="fa-solid fa-trash text-danger"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                   
+                </div>
+        </div>
+       <div class="d-flex justify-content-center align-items-center mt-2">
+            <pagination-controls 
+            (pageChange)="p=$event">
+            </pagination-controls>
+       </div>
+    </div>
+</div>
